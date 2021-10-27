@@ -3,6 +3,7 @@ package htmlUnit;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -24,6 +25,7 @@ public class Test_Scrape_HtmlUnit
 		webClient.getOptions().setCssEnabled(false);
 		webClient.getOptions().setJavaScriptEnabled(false); //WARNING: Obsolete content type encountered: 'text/javascript'.
         webClient.getOptions().setDownloadImages(true);
+        WebResponse response = htmlPage.getWebResponse();
 
 		System.out.println(htmlPage.getTitleText() + "\n");
 
@@ -44,5 +46,5 @@ public class Test_Scrape_HtmlUnit
 		for (HtmlAnchor anchor : anchors) {
 			System.out.println(anchor.getAttribute("href") + "\n");
 		}
-	}
+	}//fine main
 }
