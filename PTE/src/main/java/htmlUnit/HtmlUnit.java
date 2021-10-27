@@ -43,7 +43,7 @@ public class HtmlUnit
 		webClient.waitForBackgroundJavaScript(jsDelay);
 
 		return(list);
-	}
-
+		
+	}//fine List<WebResponse>
 }
 
