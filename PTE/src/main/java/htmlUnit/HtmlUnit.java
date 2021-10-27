@@ -6,13 +6,14 @@ import com.gargoylesoftware.htmlunit.util.*;
 import java.util.*;
 import java.lang.*;
 import java.io.*;
+
 public class HtmlUnit 
 {
-
 	private static com.gargoylesoftware.htmlunit.IncorrectnessListener incorrectnessListener_ = new RIncorrectnessListener();
 	private static com.gargoylesoftware.css.parser.CSSErrorHandler cssErrorHandler_ = new RDefaultCssErrorHandler();
 
-	public static List<WebResponse> getRequestsFor(String url, long jsDelay, int timeout, Boolean css, Boolean images) throws IOException {
+	public static List<WebResponse> getRequestsFor(String url, long jsDelay, int timeout, Boolean css, Boolean images) throws IOException 
+	{
 
 		final WebClient webClient = new WebClient(BrowserVersion.CHROME);
 
@@ -28,7 +29,8 @@ public class HtmlUnit
 
 		final List<WebResponse> list = new ArrayList<>();
 
-		new WebConnectionWrapper(webClient) {
+		new WebConnectionWrapper(webClient) 
+		{
 			@Override
 			public WebResponse getResponse(final WebRequest request) throws IOException {
 				final WebResponse response = super.getResponse(request);
@@ -41,7 +43,6 @@ public class HtmlUnit
 		webClient.waitForBackgroundJavaScript(jsDelay);
 
 		return(list);
-
 	}
 
 }

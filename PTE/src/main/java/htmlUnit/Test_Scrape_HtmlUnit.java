@@ -6,6 +6,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 
@@ -24,15 +25,15 @@ public class Test_Scrape_HtmlUnit
 		webClient.getOptions().setUseInsecureSSL(true);
 		webClient.getOptions().setCssEnabled(false);
 		webClient.getOptions().setJavaScriptEnabled(false); //WARNING: Obsolete content type encountered: 'text/javascript'.
-        webClient.getOptions().setDownloadImages(true);
-        WebResponse response = htmlPage.getWebResponse();
+		webClient.getOptions().setDownloadImages(true);
+		WebResponse response = htmlPage.getWebResponse();
 
 		System.out.println(htmlPage.getTitleText() + "\n");
 
 		//querySelector
 		try
 		{
-			DomNode domNode = htmlPage.querySelector("headings");
+			DomNode domNode = htmlPage.querySelector("p");
 			System.out.println(domNode.getVisibleText());
 
 		}
@@ -42,9 +43,16 @@ public class Test_Scrape_HtmlUnit
 		}
 
 		//recupera tutti i link all'interno del sito
-		List<HtmlAnchor> anchors = htmlPage.getAnchors();
+		final List<HtmlAnchor> anchors = htmlPage.getAnchors();
 		for (HtmlAnchor anchor : anchors) {
 			System.out.println(anchor.getAttribute("href") + "\n");
+		}
+
+		//recupera tutti i link all'interno del sito
+		final List<?> images = htmlPage.getByXPath("//img");
+		for (Object imageObject : images) {
+			HtmlImage image = (HtmlImage) imageObject;
+			System.out.println(image.getSrcAttribute() + "\n");
 		}
 	}//fine main
 }
