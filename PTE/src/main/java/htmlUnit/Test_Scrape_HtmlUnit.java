@@ -7,8 +7,11 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomNodeList;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -26,9 +29,10 @@ public class Test_Scrape_HtmlUnit
 		WebClient webClient = new WebClient();
 		HtmlPage htmlPage = webClient.getPage(url);
 		webClient.getOptions().setUseInsecureSSL(true);
-		webClient.getOptions().setCssEnabled(true);
-		webClient.getOptions().setJavaScriptEnabled(true); //WARNING: Obsolete content type encountered: 'text/javascript'.
-		webClient.getOptions().setDownloadImages(true);
+		webClient.getOptions().setCssEnabled(false);
+		webClient.getOptions().setJavaScriptEnabled(false); //WARNING: Obsolete content type encountered: 'text/javascript'.
+		webClient.getOptions().setDownloadImages(false);
+		//final HtmlDivision div = htmlPage.getHtmlElementById("");
 		WebResponse response = htmlPage.getWebResponse();
 
 		System.out.println(htmlPage.getTitleText() + "\n");
@@ -36,7 +40,7 @@ public class Test_Scrape_HtmlUnit
 		//querySelector
 		try
 		{
-			DomNode domNode = htmlPage.querySelector("p"); //("html") recupera tutto il file html del sito
+			DomNode domNode = htmlPage.querySelector("script > src"); //("html") recupera tutto il file html del sito
 			System.out.println(domNode.getVisibleText());
 
 		}
@@ -58,6 +62,33 @@ public class Test_Scrape_HtmlUnit
 		{
 			HtmlImage img = (HtmlImage) image;
 			System.out.println(image.getSrcAttribute() + "\n");
+		}
+
+//		try 
+//		{
+//			DomNodeList<DomElement> list =  htmlPage.getElementsByTagName("script");
+//			for(DomElement t : list)
+//			{
+//			System.out.println(t.getAttribute("src"));
+//
+//			}
+//		} catch (Exception e) 
+//		{
+//			e.printStackTrace();
+//		}
+		
+		try 
+		{
+			DomNodeList<DomElement> list =  htmlPage.getElementsByTagName("script");
+			for(DomElement t : list)
+			{
+			System.out.println(t.toString()); // asXlm(); getScriptableElement(); toString()
+
+			}
+		} catch (Exception e) 
+		{
+			e.printStackTrace();
+			System.out.println("NOPE");
 		}
 
 	}//fine main
