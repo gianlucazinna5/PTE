@@ -41,8 +41,16 @@ public class LinkArray {
         return min;
     }
 
-    public void scambio() {
+    public void Iffo(int i) {
+        if(Links.get(i).charAt() < ) {
 
+        }
+    }
+
+    public void scambio(int min) {
+        for(int i = 0; i < min; i++) {
+            Links.get(i).charAt()
+        }
     }
 
     public void Ordinamento() {
