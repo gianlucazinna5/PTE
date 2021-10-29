@@ -1,7 +1,9 @@
+import sun.awt.image.ImageWatched;
+
 import java.util.ArrayList;
 import java.util.Date;
 
-public class LinkArray {
+public class LinkArray implements Metodozzi {
 
     private String url;
     private final Date data;
@@ -25,10 +27,11 @@ public class LinkArray {
 
     ArrayList Links = new ArrayList();
 
-    public void AggiungiLink() {
-        Links.forEach(() -> {
+    @Override
+    public void Popolatore() {
+        for(int i =0; i < Links.size(); i++) {
             Links.add();
-        });
+        }
     }
 
     public int MinCharString() {
@@ -41,28 +44,18 @@ public class LinkArray {
         return min;
     }
 
-    public void Iffo(int i) {
-        if(Links.get(i).charAt() < ) {
-
-        }
-    }
-
-    public void scambio(int min) {
-        for(int i = 0; i < min; i++) {
-            Links.get(i).charAt()
-        }
-    }
-
     public void Ordinamento() {
-        for(int i = 0; i < Links.size(); i++) {
-            int x = i;
-            for(int j = i-1; j >= 0; j++) {
-                if(((String) Links.get(j)).charAt(0) > ((String) Links.get(x)).charAt(0)) {
-                    int k = (int) Links.get(x);
-                    Links.set(x, Links.get(j));
-                    Links.set(j, k);
-                    x = j;
-                }else break;
+        LinkArray temp = new LinkArray(null, null);
+        for(int i = Links.size() - 1; i > 0; i--) {
+            for(int j = i + 1; j >= 0; j--) {
+                for(int k = 0; k < MinCharString(); k++) {
+                    if(((String) Links.get(j)).charAt(k) > ((String) Links.get(j)).charAt(k)) {
+                        temp = (LinkArray) Links.get(j);
+                        Links.set(j, Links.get(i));
+                        Links.set(j, temp);
+                        break;
+                    }
+                }
             }
         }
     }

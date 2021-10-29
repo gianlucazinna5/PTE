@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class AlberiArray {
+public class AlberiArray implements Metodozzi {
 
     private String url;
 
@@ -10,6 +10,11 @@ public class AlberiArray {
 
     public String getUrl() {
         return url;
+    }
+
+    @Override
+    public void Popolatore() {
+
     }
 
 //    ArrayList Alberis = new ArrayList();
